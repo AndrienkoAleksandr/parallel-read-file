@@ -15,5 +15,10 @@ spec:
     spec:
       containers:
         - name: go-lang-test
+          command:
+          - tail
+          args:
+          - -f
+          - '/dev/null'
           image: >-
             registry.redhat.io/rhel8/go-toolset@sha256:2d56a94f1e83fe0e874f099dd8d03b876186985a7dbeea118e8c725b1b07b9f0
