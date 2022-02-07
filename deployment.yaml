@@ -1,16 +1,15 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: example
   namespace: default
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: go-lang-test
+  replicas: 3
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: go-lang-test
     spec:
@@ -18,24 +17,3 @@ spec:
         - name: go-lang-test
           image: >-
             registry.redhat.io/rhel8/go-toolset@sha256:2d56a94f1e83fe0e874f099dd8d03b876186985a7dbeea118e8c725b1b07b9f0
-          command:
-            - tail
-          args:
-            - '-f'
-            - /dev/null
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          imagePullPolicy: IfNotPresent
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 30
-      dnsPolicy: ClusterFirst
-      securityContext: {}
-      schedulerName: default-scheduler
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 25%
-      maxSurge: 25%
-  revisionHistoryLimit: 10
-  progressDeadlineSeconds: 600
